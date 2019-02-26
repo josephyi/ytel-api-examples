@@ -1,0 +1,28 @@
+service: aws-nodejs-mms-rekognition
+
+frameworkVersion: ">=1.4.0 <2.0.0"
+package:
+  exclude:
+    - .git/**
+    - package.json
+
+custom:
+  stage: "${opt:stage, self:provider.stage}"
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment: ${file(env.yml):${self:custom.stage}.variables}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "rekognition:DetectLabels"
+      Resource: "*"
+
+functions:
+  mmsHandler:
+    handler: index.handler
+    events:
+      - http:
+          path: handle
+          method: post

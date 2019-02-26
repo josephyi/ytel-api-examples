@@ -1,0 +1,11 @@
+{
+  "name": "aws-nodejs-mms-rekognition",
+  "version": "1.0.0",
+  "description": "Demostrating Ytel MMS inbound, SMS outbound.",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.407.0"
+  }
+}

@@ -87,11 +87,12 @@ http -f https://qpc1e7ocjp.execute-api.us-east-1.amazonaws.com/dev/handle To=+16
 This demo assumes you have already converted your `AccountSid` and `AuthToken` to base64-encoded credentials. For your convenience, the [Ytel API Dashboard](https://portal.ytel.com/docs/v3/Dashboard/index) has a button to copy the `{AccountSid}:{AuthToken}`, which you can encode yourself, or you can try using the [API Documentation](https://docs.ytel.com/reference/sms#sendsms), which will have the token generated in the sample code.
 
 To generate it yourself, given the following AccountSid and AuthToken:
+
 | AccountSid | AuthToken |
 | --- | --- |
 | 1e2eff2c-3927-11e9-a551-671bc9b3471c | d1ebef211a74479z01e6b91b8e9j21dz |
 
-From `{AccountSid}:{AuthToken}` form, e.g.:
+In `{AccountSid}:{AuthToken}` form, e.g.:
 ```
 1e2eff2c-3927-11e9-a551-671bc9b3471c:d1ebef211a74479z01e6b91b8e9j21dz
 ```

@@ -11,7 +11,7 @@ number supporting MMS, which will result in a SMS response with some label detec
 
 For simplicity's sake, this project uses The Serverless Framework to 
 set up the HTTP endpoint, deploy the code in an AWS Lambda function, and grant fine-grained permissions to use Rekognition.
-Rather than setting up the entire project, you can also simply view the source, which is lightly commented and relatively straightforward.
+Rather than setting up the entire project, you can also simply [view the source](https://github.com/Ytel-Inc/ytel-api-examples/blob/master/aws-nodejs-mms-rekognition/index.js), which is lightly commented and relatively straightforward.
 
 ## Prerequisites
 * AWS Account

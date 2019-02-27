@@ -6,3 +6,4 @@ A collection of demos and projects utilizing the Ytel API to create communicatio
 | Project | Description |
 | --- | --- |
 | [aws-nodejs-mms-rekognition](https://github.com/Ytel-Inc/ytel-api-examples/tree/master/aws-nodejs-mms-rekognition) | Demonstrates handling of Inbound SMS/MMS callbacks and sending Outbound SMS in an AWS serverless architecture.|
+| [gcp-nodejs-mms-vision](https://github.com/Ytel-Inc/ytel-api-examples/tree/master/aws-nodejs-mms-rekognition) | Demonstrates handling of Inbound SMS/MMS callbacks and sending Outbound SMS in a Google Cloud Function.|

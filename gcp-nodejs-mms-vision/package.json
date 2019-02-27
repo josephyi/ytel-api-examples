@@ -1,0 +1,11 @@
+{
+  "name": "gcp-nodejs-mms-vision",
+  "version": "1.0.0",
+  "description": "Example demonstrates how to setup a simple HTTP GET endpoint",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/vision": "^0.25.0",
+    "serverless-google-cloudfunctions": "^2.3.2"
+  }
+}

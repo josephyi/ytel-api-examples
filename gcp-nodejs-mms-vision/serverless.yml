@@ -1,0 +1,22 @@
+service: gcp-nodejs-mms-vision
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+custom:
+  stage: "${opt:stage, self:provider.stage}"
+
+provider:
+  name: google
+  runtime: nodejs8
+  environment: ${file(env.yml):${self:custom.stage}.variables}
+  project: ${file(env.yml):${self:custom.stage}.project}
+  credentials: ${file(env.yml):${self:custom.stage}.credentials}
+
+plugins:
+  - serverless-google-cloudfunctions
+
+functions:
+  mmsHandler:
+    handler: inboundHandler
+    events:
+      - http: path

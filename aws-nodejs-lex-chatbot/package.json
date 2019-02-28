@@ -1,5 +1,5 @@
 {
-  "name": "aws-lex-chatbot",
+  "name": "aws-nodejs-lex-chatbot",
   "version": "1.0.0",
   "description": "Inbound SMS callback and Outbound SMS demo",
   "main": "index.js",

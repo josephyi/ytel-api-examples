@@ -1,4 +1,4 @@
-service: aws-lex-chatbot
+service: aws-nodejs-lex-chatbot
 
 plugins:
   - serverless-iam-roles-per-function

@@ -27,4 +27,5 @@ functions:
   InboundSMSHandler: aws-nodejs-lex-chatbot-dev-InboundSMSHandler
   OutboundSMSHandler: aws-nodejs-lex-chatbot-dev-OutboundSMSHandler
 layers:
-  None```
+  None
+```

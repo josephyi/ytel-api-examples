@@ -12,7 +12,10 @@ provider:
   region: ${file(env.yml):${self:custom.stage}.region}
   account_id: ${file(env.yml):${self:custom.stage}.account_id}
   queue_name: ${file(env.yml):${self:custom.stage}.queue_name}
+  bot_name: ${file(env.yml):${self:custom.stage}.bot_name}
+  bot_alias: ${file(env.yml):${self:custom.stage}.bot_alias}
   sqs_arn: "arn:aws:sqs:${self:provider.region}:${self:provider.account_id}:${self:provider.queue_name}"
+  lex_arn: "arn:aws:lex:${self:provider.region}:${self:provider.account_id}:bot:${self:provider.bot_name}:${self:provider.bot_alias}"
 
 functions:
   InboundSMSHandler:
@@ -23,12 +26,18 @@ functions:
           - "sqs:SendMessage"
           - "sqs:GetQueueUrl"
         Resource: "${self:provider.sqs_arn}"
+      - Effect: Allow
+        Action:
+          - "lex:PostText"
+        Resource: "${self:provider.lex_arn}"
     events:
       - http:
           path: callback
           method: post
     environment:
       QUEUE_URL: https://sqs.${self:provider.region}.amazonaws.com/${self:provider.account_id}/${self:provider.queue_name}
+      BOT_NAME: ${self:provider.bot_name}
+      BOT_ALIAS: ${self:provider.bot_alias}
   OutboundSMSHandler:
     handler: src/outbound.handler
     iamRoleStatements:
@@ -38,10 +47,6 @@ functions:
           - "sqs:DeleteMessage"
           - "sqs:GetQueueAttributes"
         Resource: "${self:provider.sqs_arn}"
-      - Effect: Allow
-        Action:
-          - "lex:PostText"
-        Resource: "*"
     events: 
       - sqs:
           arn: "${self:provider.sqs_arn}"

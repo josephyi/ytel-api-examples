@@ -1,0 +1,55 @@
+service: aws-lex-chatbot
+
+plugins:
+  - serverless-iam-roles-per-function
+
+custom:
+  stage: "${opt:stage, self:provider.stage}"
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: ${file(env.yml):${self:custom.stage}.region}
+  account_id: ${file(env.yml):${self:custom.stage}.account_id}
+  queue_name: ${file(env.yml):${self:custom.stage}.queue_name}
+  sqs_arn: "arn:aws:sqs:${self:provider.region}:${self:provider.account_id}:${self:provider.queue_name}"
+
+functions:
+  InboundSMSHandler:
+    handler: src/inbound.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - "sqs:SendMessage"
+          - "sqs:GetQueueUrl"
+        Resource: "${self:provider.sqs_arn}"
+    events:
+      - http:
+          path: callback
+          method: post
+    environment:
+      QUEUE_URL: https://sqs.${self:provider.region}.amazonaws.com/${self:provider.account_id}/${self:provider.queue_name}
+  OutboundSMSHandler:
+    handler: src/outbound.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - "sqs:ReceiveMessage"
+          - "sqs:DeleteMessage"
+          - "sqs:GetQueueAttributes"
+        Resource: "${self:provider.sqs_arn}"
+      - Effect: Allow
+        Action:
+          - "lex:PostText"
+        Resource: "*"
+    events: 
+      - sqs:
+          arn: "${self:provider.sqs_arn}"
+    environment:
+      AUTH_CREDENTIALS: ${file(env.yml):${self:custom.stage}.auth_credentials}
+resources:
+  Resources:
+    YtelChatbotOutboundSMSQueue:
+      Type: 'AWS::SQS::Queue'
+      Properties:
+        QueueName: ${self:provider.queue_name}

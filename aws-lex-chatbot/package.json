@@ -1,0 +1,19 @@
+{
+  "name": "aws-lex-chatbot",
+  "version": "1.0.0",
+  "description": "Inbound SMS callback and Outbound SMS demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.411.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  },
+  "devDependencies": {
+    "serverless-iam-roles-per-function": "^1.0.4"
+  }
+}
